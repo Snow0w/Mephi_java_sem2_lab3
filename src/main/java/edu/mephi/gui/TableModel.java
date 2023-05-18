@@ -20,6 +20,13 @@ public class TableModel extends AbstractTableModel {
     mode = "Country";
   }
 
+  public void setData(ArrayList<String[]> data, String mode) {
+    this.data = data;
+    this.mode = mode;
+    fireTableDataChanged();
+    fireTableStructureChanged();
+  }
+
   @Override
   public int getColumnCount() {
     return colCnt;

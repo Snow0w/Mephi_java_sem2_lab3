@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -40,6 +41,7 @@ public class Gui extends JFrame implements ActionListener {
   private JButton renderButton;
   private JTable table;
   private TableModel tableModel;
+  private JScrollPane scroll;
 
   public Gui(String name) {
     super(name);
@@ -72,8 +74,11 @@ public class Gui extends JFrame implements ActionListener {
     buttonPane.add(renderButton);
     tableModel = new TableModel();
     table = new JTable(tableModel);
-    tablePane.add(table);
-    this.add(this.tablePane, BorderLayout.CENTER);
+    // tablePane.add(table);
+    // this.add(this.tablePane, BorderLayout.CENTER);
+    scroll = new JScrollPane(table);
+
+    this.add(this.scroll, BorderLayout.CENTER);
     this.add(this.buttonPane, BorderLayout.SOUTH);
     loginData = new LoginInfo(null, null);
     reactorFile = null;
@@ -107,6 +112,12 @@ public class Gui extends JFrame implements ActionListener {
     try {
       tableModel = db.getTableModel(agregBox.getSelectedIndex());
       table = new JTable(tableModel);
+      this.remove(scroll);
+      this.revalidate();
+      scroll = new JScrollPane(table);
+      this.add(this.scroll, BorderLayout.CENTER);
+      this.revalidate();
+      repaint();
     } catch (SQLException e) {
       JOptionPane.showMessageDialog(this, e.getMessage(), "Can't create",
                                     JOptionPane.ERROR_MESSAGE);
@@ -144,9 +155,9 @@ public class Gui extends JFrame implements ActionListener {
   }
 
   private void chooseExcelAction() {
-    // JFileChooser fileopen = new JFileChooser();
-    JFileChooser fileopen =
-        new JFileChooser("/home/snow0w/repos/JAVA/lab3/files/");
+    JFileChooser fileopen = new JFileChooser();
+    // JFileChooser fileopen =
+    //     new JFileChooser("/home/snow0w/repos/JAVA/lab3/files/");
     int ret = fileopen.showDialog(null, "Choose file");
     if (ret != JFileChooser.APPROVE_OPTION) {
       return;
@@ -155,9 +166,9 @@ public class Gui extends JFrame implements ActionListener {
   }
 
   private void chooseFileAction() {
-    // JFileChooser fileopen = new JFileChooser();
-    JFileChooser fileopen =
-        new JFileChooser("/home/snow0w/repos/JAVA/lab3/files/");
+    JFileChooser fileopen = new JFileChooser();
+    // JFileChooser fileopen =
+    //     new JFileChooser("/home/snow0w/repos/JAVA/lab3/files/");
     int ret = fileopen.showDialog(null, "Choose file");
     if (ret != JFileChooser.APPROVE_OPTION) {
       return;

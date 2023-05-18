@@ -2,7 +2,6 @@
 .gradle
 
 # Ignore Gradle build output directory
-build
 
 .classpath
 .gitattributes
@@ -12,3 +11,4 @@ gradlew.bat
 settings.gradle
 files/.~lock.test.xlsx#
 Gui_old.java
+test
