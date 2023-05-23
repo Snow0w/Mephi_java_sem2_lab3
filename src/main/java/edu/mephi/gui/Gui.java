@@ -29,8 +29,8 @@ public class Gui extends JFrame implements ActionListener {
   private LoginInfo loginData;
   private String reactorFile;
   private String excelFile;
+  private TableModel tableModel;
 
-  private JPanel tablePane;
   private JPanel buttonPane;
   private JButton loginButton;
   private JButton createButton;
@@ -40,7 +40,6 @@ public class Gui extends JFrame implements ActionListener {
   private JComboBox<String> agregBox;
   private JButton renderButton;
   private JTable table;
-  private TableModel tableModel;
   private JScrollPane scroll;
 
   public Gui(String name) {
@@ -49,7 +48,6 @@ public class Gui extends JFrame implements ActionListener {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLocationRelativeTo(null);
     this.setLayout(new BorderLayout());
-    this.tablePane = new JPanel(new BorderLayout());
     this.buttonPane = new JPanel(new GridLayout(0, 4));
     this.loginButton = new JButton("Login to database");
     loginButton.addActionListener(this);
