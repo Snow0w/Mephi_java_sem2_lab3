@@ -17,4 +17,4 @@
 
 #### Диаграмма классов
 
-![alt text](https://github.com/Snow0w/Mephi_java_sem2_lab2/blob/master/files/images/diagram.jpg)
+![alt text](https://github.com/Snow0w/Mephi_java_sem2_lab3/blob/master/files/images/diagram3.jpg)
