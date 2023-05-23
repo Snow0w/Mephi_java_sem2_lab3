@@ -14,11 +14,6 @@ repositories {
 }
 
 dependencies {
-    // implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
-    // implementation group: 'org.apache.poi', name: 'poi', version: '5.2.3'
-    // implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.3'
-    // implementation 'com.github.moove-it:fakeit:v0.5'
-    // implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.14.2'
     implementation group: 'org.apache.poi', name: 'poi', version: '5.2.3'
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.3'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
@@ -26,18 +21,46 @@ dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.14.2'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2'
     implementation 'org.postgresql:postgresql:42.6.0'
-
-
-
-
-
 }
+
+// jar {
+//     manifest.attributes["Main-Class"] = "edu.mephi.Lab3"
+//     val dependencies = configurations
+//         .runtimeClasspath
+//         .get()
+//         .map(::zipTree) // OR .map { zipTree(it) }
+//     from(dependencies)
+//     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+// }
+
 
 jar {
     manifest {
         attributes 'Main-Class': 'edu.mephi.Lab3'
     }
+  from {
+    configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+  } {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+  }
+
 }
+
+// task fatJar(type: Jar) {
+//   manifest.from jar.manifest
+//   classifier = 'all'
+//   from {
+//     configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+//   } {
+//     exclude "META-INF/*.SF"
+//     exclude "META-INF/*.DSA"
+//     exclude "META-INF/*.RSA"
+//   }
+//   with jar
+// }
+// artifacts {
+//     archives fatJar
+// }
 
 ext {
     javaMainClass = "edu.mephi.Lab3"
